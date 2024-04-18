@@ -1,10 +1,7 @@
 package com.example.buensaborback.domain.entities;
 
 import com.example.buensaborback.domain.entities.enums.TipoPromocion;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -30,23 +27,18 @@ public class Promocion extends Base {
     private Double precioPromocional;
     private TipoPromocion tipoPromocion;
 
-
     @ManyToMany
     //SE AGREGA EL JOIN TABLE PARA QUE JPA CREE LA TABLA INTERMEDIA EN UNA RELACION MANY TO MANY
-    @JoinTable(name = "promocion_articuloManufacturado",
+    @JoinTable(name = "promocion_articulo",
             joinColumns = @JoinColumn(name = "promocion_id"),
-            inverseJoinColumns = @JoinColumn(name = "articuloManufacturado_id"))
+            inverseJoinColumns = @JoinColumn(name = "articulo_id"))
     //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
     @Builder.Default
-    private Set<ArticuloManufacturado> articuloManufacturados = new HashSet<>();
+    private Set<Articulo> articulos = new HashSet<>();
 
-    @ManyToMany
-    //SE AGREGA EL JOIN TABLE PARA QUE JPA CREE LA TABLA INTERMEDIA EN UNA RELACION MANY TO MANY
-    @JoinTable(name = "promocion_articuloInsumo",
-            joinColumns = @JoinColumn(name = "promocion_id"),
-            inverseJoinColumns = @JoinColumn(name = "articuloInsumo_id"))
-    //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
+    @OneToMany
+    @JoinColumn(name = "promocion_id")
     @Builder.Default
-    private Set<ArticuloInsumo> articulosInsumos = new HashSet<>();
+    private Set<Imagen> imagenes = new HashSet<>();
 
 }
