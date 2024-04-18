@@ -19,6 +19,7 @@ import java.util.Set;
 public class Localidad extends Base{
 
     private String nombre;
+    private Integer cp;
 
     @ManyToOne
     private Provincia provincia;

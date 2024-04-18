@@ -1,5 +1,6 @@
 package com.example.buensaborback.domain.entities;
 
+import com.example.buensaborback.domain.entities.enums.TipoPromocion;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -25,7 +26,9 @@ public class Promocion extends Base {
     private LocalDate fechaHasta;
     private LocalTime horaDesde;
     private LocalTime horaHasta;
-    private Double descuento;
+    private String descripcionDescuento;
+    private Double precioPromocional;
+    private TipoPromocion tipoPromocion;
 
 
     @ManyToMany

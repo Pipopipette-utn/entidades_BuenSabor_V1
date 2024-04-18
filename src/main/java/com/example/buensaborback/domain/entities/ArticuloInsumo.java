@@ -25,8 +25,10 @@ public class ArticuloInsumo extends Base{
     @ManyToOne
     private UnidadMedida unidadMedida;
 
-    @OneToOne
-    private Imagen imagen;
+    @OneToMany
+    @JoinColumn(name = "articuloInsumo_id")
+    @Builder.Default
+    private Set<Imagen> imagenes = new HashSet<>();
 
     @ManyToMany(mappedBy = "articulosInsumos")
     //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA

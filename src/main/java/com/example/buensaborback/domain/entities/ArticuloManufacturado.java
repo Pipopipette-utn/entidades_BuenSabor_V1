@@ -20,8 +20,11 @@ public class ArticuloManufacturado extends Base{
     private Double precioVenta;
     private Integer tiempoEstimadoMinutos;
 
-    @OneToOne
-    private Imagen imagen;
+
+    @OneToMany
+    @JoinColumn(name = "articuloManufacturado_id")
+    @Builder.Default
+    private Set<Imagen> imagenes = new HashSet<>();
 
     @ManyToOne
     private UnidadMedida unidadMedida;
