@@ -14,7 +14,12 @@ import java.util.Set;
 @ToString
 @Setter
 @SuperBuilder
-public class Articulo extends Base{
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Articulo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    protected Long id;
+
     protected String denominacion;
     protected Double precioVenta;
 
