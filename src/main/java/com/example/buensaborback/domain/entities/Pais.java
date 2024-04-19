@@ -1,11 +1,8 @@
 package com.example.buensaborback.domain.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor

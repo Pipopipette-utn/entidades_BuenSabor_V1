@@ -1,7 +1,8 @@
 package com.example.buensaborback.repositories;
 
 import com.example.buensaborback.domain.entities.ArticuloInsumo;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ArticuloInsumoRepository extends JpaRepository<ArticuloInsumo,Long> {
+@Repository
+public interface ArticuloInsumoRepository extends IBaseRepository<ArticuloInsumo,Long> {
 }

@@ -1,7 +1,8 @@
 package com.example.buensaborback.repositories;
 
 import com.example.buensaborback.domain.entities.Categoria;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CategoriaRepository extends JpaRepository<Categoria,Long> {
+@Repository
+public interface CategoriaRepository extends IBaseRepository<Categoria,Long> {
 }

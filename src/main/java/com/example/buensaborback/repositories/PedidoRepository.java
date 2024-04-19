@@ -1,7 +1,8 @@
 package com.example.buensaborback.repositories;
 
 import com.example.buensaborback.domain.entities.Pedido;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface PedidoRepository extends JpaRepository<Pedido,Long> {
+@Repository
+public interface PedidoRepository extends IBaseRepository<Pedido,Long> {
 }

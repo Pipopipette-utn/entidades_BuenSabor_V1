@@ -6,7 +6,6 @@ import com.example.buensaborback.domain.entities.enums.TipoEnvio;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -30,11 +29,13 @@ public class Pedido extends Base{
     private LocalDate fechaPedido;
 
     @ManyToOne
+    private Sucursal sucursal;
+
+    @ManyToOne
     private Domicilio domicilio;
 
     @OneToOne
     private Factura factura;
-
 
     @OneToMany(cascade = CascadeType.ALL)
     //SE AGREGA EL JOIN COLUMN PARA QUE JPA NO CREE LA TABLA INTERMEDIA EN UNA RELACION ONE TO MANY

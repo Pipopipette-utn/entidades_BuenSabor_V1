@@ -2,6 +2,7 @@ package com.example.buensaborback.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,8 +12,8 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-@Builder
 @Entity
+@SuperBuilder
 public class ArticuloManufacturado extends Articulo{
 
     private String descripcion;
@@ -20,8 +21,8 @@ public class ArticuloManufacturado extends Articulo{
     private String preparacion;
 
     @OneToMany
-    @JoinColumn(name = "articuloManufacturado_id")
+    @JoinColumn(name = "articulo_manufacturado_id")
     @Builder.Default
-    private Set<ArticuloManufacturadoDetalle> articulosManufacturadosDetalle = new HashSet<>();
+    private Set<ArticuloManufacturadoDetalle> articulosManufacturadosDetalles = new HashSet<>();
 
 }

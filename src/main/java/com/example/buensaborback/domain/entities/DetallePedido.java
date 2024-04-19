@@ -3,7 +3,6 @@ package com.example.buensaborback.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -14,11 +13,9 @@ import lombok.*;
 public class DetallePedido extends Base{
 
     private Integer cantidad;
-    private Double subTotal;
+    private Double subtotal;
 
-    @OneToOne
-    private ArticuloManufacturado articuloManufacturado;
+    @ManyToOne
+    private Articulo articulo;
 
-    @OneToOne
-    private ArticuloInsumo articuloInsumo;
 }

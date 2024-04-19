@@ -1,10 +1,8 @@
 package com.example.buensaborback.domain.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
-
 
 @NoArgsConstructor
 @AllArgsConstructor

@@ -1,9 +1,7 @@
 package com.example.buensaborback.domain.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import lombok.*;
 
 @NoArgsConstructor
@@ -17,6 +15,9 @@ public class Domicilio extends Base{
 
     private String calle;
     private Integer numero;
+    private Integer cp;
+    private Integer piso;
+    private String departamento;
 
     @ManyToOne
     private Localidad localidad;

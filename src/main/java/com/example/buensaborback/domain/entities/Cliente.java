@@ -1,9 +1,6 @@
 package com.example.buensaborback.domain.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
@@ -21,11 +18,12 @@ public class Cliente extends Base{
     private String nombre;
     private String apellido;
     private String telefono;
+
+    @Column(unique=true)
     private String email;
 
     @OneToOne
     private Usuario usuario;
-
 
     @OneToMany
     //SE AGREGA EL JOIN COLUMN PARA QUE JPA NO CREE LA TABLA INTERMEDIA EN UNA RELACION ONE TO MANY
@@ -34,5 +32,18 @@ public class Cliente extends Base{
     //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
     @Builder.Default
     private Set<Pedido> pedidos = new HashSet<>();
+
+    @OneToOne
+    private Imagen imagen;
+
+    @ManyToMany
+    @JoinTable(
+            name = "cliente_domicilio",
+            joinColumns = {@JoinColumn(name = "cliente_id")},
+            inverseJoinColumns = {@JoinColumn(name = "domicilio_id")}
+    )
+    //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
+    @Builder.Default
+    private Set<Domicilio> domicilios = new HashSet<>();
 
 }
