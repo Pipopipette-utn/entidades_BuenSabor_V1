@@ -3,6 +3,7 @@ package com.example.buensaborback.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,6 +19,7 @@ public class Cliente extends Base{
     private String nombre;
     private String apellido;
     private String telefono;
+    private LocalDate fechaNacimiento;
 
     @Column(unique=true)
     private String email;

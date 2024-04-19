@@ -1,6 +1,9 @@
 package com.example.buensaborback;
 
 import com.example.buensaborback.domain.entities.*;
+import com.example.buensaborback.domain.entities.enums.Estado;
+import com.example.buensaborback.domain.entities.enums.FormaPago;
+import com.example.buensaborback.domain.entities.enums.TipoEnvio;
 import com.example.buensaborback.domain.entities.enums.TipoPromocion;
 import com.example.buensaborback.repositories.*;
 import org.slf4j.Logger;
@@ -59,6 +62,21 @@ public class BuenSaborBackApplication {
 
 	@Autowired
 	private PromocionRepository promocionRepository;
+
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+
+	@Autowired
+	private FacturaRepository facturaRepository;
+
+	@Autowired
+	private DetallePedidoRepository detallePedidoRepository;
+
+	@Autowired
+	private PedidoRepository pedidoRepository;
+
+	@Autowired
+	private ClienteRepository clienteRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BuenSaborBackApplication.class, args);
@@ -381,6 +399,52 @@ public class BuenSaborBackApplication {
 			logger.info("Sucursal Chacras {}",sucursalChacras);
 			logger.info("Sucursal Godoy Cruz {}",sucursalGodoyCruz);
 
+			//Agregar Usuario
+			Usuario usuario = Usuario.builder().username("argento").auth0Id("iVBORw0KGgoAAAANSUhEUgAAAK0AAACUCAMAAADWBFkUAAABEVBMVEX").build();
+			usuarioRepository.save(usuario);
+
+			//Agregar imágen de cliente
+			Imagen imagenUsuario = Imagen.builder().denominacion("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsa2xSPPay4GD7E3cthBMCcvPMADEjFufUWQ&s").build();
+			imagenRepository.save(imagenUsuario);
+
+			//agregar domicilios de cliente
+			Domicilio domicilioCliente1 = Domicilio.builder().calle("Sarmiento").numero(123).cp(5507).localidad(godoyCruz).build();
+			Domicilio domicilioCliente2 = Domicilio.builder().calle("San martin").numero(412).cp(5501).localidad(lujanDeCuyo).build();
+			domicilioRepository.save(domicilioCliente1);
+			domicilioRepository.save(domicilioCliente2);
+
+			// agregar factura
+			Factura factura = Factura.builder().fechaFacturacion(LocalDate.of(2024, 2, 13)).formaPago(FormaPago.MercadoPago).mpMerchantOrderId(1).mpPaymentId(1).mpPaymentType("mercado pago").mpPreferenceId("0001").totalVenta(2500d).build();
+			facturaRepository.save(factura);
+
+			// agregar detalle pedido
+			DetallePedido detallePedido1 = DetallePedido.builder().articulo(pizzaMuzarella).cantidad(1).subTotal(130d).build();
+			DetallePedido detallePedido2 = DetallePedido.builder().articulo(cocaCola).cantidad(1).subTotal(70d).build();
+
+			// agregar pedido
+			Pedido pedido = Pedido.builder()
+					.domicilio(domicilioCliente1)
+					.estado(Estado.Entregado)
+					.factura(factura)
+					.formaPago(FormaPago.MercadoPago)
+					.fechaPedido(LocalDate.of(2024, 4, 18))
+					.horaEstimadaFinalizacion(LocalTime.of(12, 30))
+					.sucursal(sucursalChacras)
+					.tipoEnvio(TipoEnvio.Delivery)
+					.total(200d)
+					.totalCosto(180d)
+					.build();
+
+			pedido.getDetallePedidos().add(detallePedido1);
+			pedido.getDetallePedidos().add(detallePedido2);
+			pedidoRepository.save(pedido);
+
+			// agregar cliente
+			Cliente cliente1 = Cliente.builder().nombre("Alejandro").email("alex@gmail.com").apellido("Lencinas").imagen(imagenUsuario).telefono("2634666666").usuario(usuario).fechaNacimiento(LocalDate.of(1990, 12, 15)).build();
+			cliente1.getDomicilios().add(domicilioCliente1);
+			cliente1.getDomicilios().add(domicilioCliente2);
+			cliente1.getPedidos().add(pedido);
+			clienteRepository.save(cliente1);
 		};
 	}
 }

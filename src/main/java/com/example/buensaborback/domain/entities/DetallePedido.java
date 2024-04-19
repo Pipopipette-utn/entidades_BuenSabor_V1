@@ -13,7 +13,7 @@ import lombok.*;
 public class DetallePedido extends Base{
 
     private Integer cantidad;
-    private Double subtotal;
+    private Double subTotal;
 
     @ManyToOne
     private Articulo articulo;
