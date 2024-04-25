@@ -1,12 +1,16 @@
 package com.example.buensaborback.business.services.impl;
 
-import com.example.buensaborback.business.services.IDomicilioService;
-import com.example.buensaborback.domain.entities.Domicilio;
-import com.example.buensaborback.repositories.BaseRepository;
+import com.example.buensaborback.business.services.IEmpresaService;
+import com.example.buensaborback.domain.entities.Empresa;
+import com.example.buensaborback.repositories.EmpresaRepository;
+import org.springframework.stereotype.Service;
 
+@Service
+public class EmpresaServiceImpl extends BaseServiceImpl<Empresa, Long> implements IEmpresaService {
+    private final EmpresaRepository empresaRepository;
 
-public class EmpresaServiceImpl extends BaseServiceImpl<Domicilio, Long> implements IDomicilioService {
-    public EmpresaServiceImpl(BaseRepository<Domicilio, Long> baseRepository) {
-        super(baseRepository);
+    public EmpresaServiceImpl(EmpresaRepository empresaRepository) {
+        super(empresaRepository);
+        this.empresaRepository = empresaRepository;
     }
 }

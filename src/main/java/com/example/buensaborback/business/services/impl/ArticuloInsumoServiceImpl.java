@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class ArticuloInsumoImpl extends BaseServiceImpl<ArticuloInsumo, Long> implements IArticuloInsumoService {
-    public ArticuloInsumoImpl(BaseRepository<ArticuloInsumo, Long> baseRepository) {
+public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, Long> implements IArticuloInsumoService {
+    public ArticuloInsumoServiceImpl(BaseRepository<ArticuloInsumo, Long> baseRepository) {
         super(baseRepository);
     }
 }
