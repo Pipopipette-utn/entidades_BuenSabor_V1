@@ -17,7 +17,7 @@ public class Domicilio extends Base{
     private Integer numero;
     private Integer cp;
     private Integer piso;
-    private String departamento;
+    private String nroDpto;
 
     @ManyToOne
     private Localidad localidad;

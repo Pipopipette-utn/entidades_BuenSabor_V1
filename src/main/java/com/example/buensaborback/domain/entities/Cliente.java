@@ -19,7 +19,7 @@ public class Cliente extends Base{
     private String nombre;
     private String apellido;
     private String telefono;
-    private LocalDate fechaNacimiento;
+    //private LocalDate fechaNacimiento;
 
     @Column(unique=true)
     private String email;

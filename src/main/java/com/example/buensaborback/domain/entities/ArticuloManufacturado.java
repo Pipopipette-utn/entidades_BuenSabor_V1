@@ -20,7 +20,7 @@ public class ArticuloManufacturado extends Articulo{
     private Integer tiempoEstimadoMinutos;
     private String preparacion;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "articulo_manufacturado_id")
     @Builder.Default
     private Set<ArticuloManufacturadoDetalle> articulosManufacturadosDetalles = new HashSet<>();

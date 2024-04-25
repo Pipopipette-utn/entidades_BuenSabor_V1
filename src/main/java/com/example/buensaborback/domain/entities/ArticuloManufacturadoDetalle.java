@@ -12,7 +12,7 @@ import lombok.*;
 @ToString
 @Builder
 public class ArticuloManufacturadoDetalle extends Base{
-    private Double cantidad;
+    private Integer cantidad;
 
     @ManyToOne
     private ArticuloInsumo articuloInsumo;
