@@ -1,0 +1,8 @@
+package com.example.buensaborback.business.services;
+
+import com.example.buensaborback.domain.entities.Promocion;
+
+import java.util.List;
+
+public interface IPromocionService extends IBaseService<Promocion, Long> {
+}

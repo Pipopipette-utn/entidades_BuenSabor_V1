@@ -4,5 +4,5 @@ import com.example.buensaborback.domain.entities.Localidad;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LocalidadRepository extends IBaseRepository<Localidad,Long> {
+public interface LocalidadRepository extends BaseRepository<Localidad,Long> {
 }

@@ -4,5 +4,5 @@ import com.example.buensaborback.domain.entities.DetallePedido;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DetallePedidoRepository extends IBaseRepository<DetallePedido,Long> {
+public interface DetallePedidoRepository extends BaseRepository<DetallePedido,Long> {
 }

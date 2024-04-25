@@ -4,5 +4,5 @@ import com.example.buensaborback.domain.entities.Imagen;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ImagenRepository extends IBaseRepository<Imagen,Long> {
+public interface ImagenRepository extends BaseRepository<Imagen,Long> {
 }
