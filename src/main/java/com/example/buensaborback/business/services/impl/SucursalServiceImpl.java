@@ -5,6 +5,9 @@ import com.example.buensaborback.domain.entities.Sucursal;
 import com.example.buensaborback.repositories.BaseRepository;
 
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class SucursalServiceImpl extends BaseServiceImpl<Sucursal, Long> implements ISucursalService {
     public SucursalServiceImpl(BaseRepository<Sucursal, Long> baseRepository) {
         super(baseRepository);

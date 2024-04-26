@@ -42,12 +42,11 @@ public abstract class BaseServiceImpl<E extends Base, Id extends Serializable> i
     @Override
     @Transactional
     public E findById(Id id) throws Exception {
-        try{
-            Optional<E> entityOptional = baseRepository.findById(id);
-            if (entityOptional.isEmpty()) throw new Exception("No existe ningún registro con el ID indicado");
+        Optional<E> entityOptional = baseRepository.findById(id);
+        if (entityOptional.isPresent()) {
             return entityOptional.get();
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
+        } else {
+            throw new Exception("No se encontró ninguna entidad con el ID: " + id);
         }
     }
 

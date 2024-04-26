@@ -6,12 +6,11 @@ import com.example.buensaborback.repositories.BaseRepository;
 import com.example.buensaborback.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implements IClienteService {
-    private final ClienteRepository clienteRepository;
+import org.springframework.stereotype.Service;
 
-    @Autowired
-    public ClienteServiceImpl(BaseRepository<Cliente, Long> baseRepository, ClienteRepository clienteRepository) {
+@Service
+public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implements IClienteService {
+    public ClienteServiceImpl(BaseRepository<Cliente, Long> baseRepository) {
         super(baseRepository);
-        this.clienteRepository = clienteRepository;
     }
 }
