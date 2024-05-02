@@ -3,92 +3,60 @@ package com.example.buensaborback.business.services.impl;
 import com.example.buensaborback.business.services.IBaseService;
 import com.example.buensaborback.domain.entities.Base;
 import com.example.buensaborback.repositories.BaseRepository;
-import jakarta.transaction.Transactional;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.io.Serializable;
 import java.util.List;
-import java.util.Optional;
 
-public abstract class BaseServiceImpl<E extends Base, Id extends Serializable> implements IBaseService<E, Id> {
-    protected BaseRepository<E, Id> baseRepository;
+@Service
+public abstract class BaseServiceImpl<E extends Base,ID extends Serializable> implements IBaseService<E, ID> {
 
-    public BaseServiceImpl(BaseRepository<E, Id> baseRepository) {
-        this.baseRepository = baseRepository;
+    private static final Logger logger = LoggerFactory.getLogger(BaseServiceImpl.class);
+
+    @Autowired
+    protected BaseRepository<E,ID> baseRepository;
+
+    @Override
+    public E create(E entity) {
+        var newEntity = baseRepository.save(entity);
+        logger.info("Creada entidad {}",newEntity);
+        return newEntity;
     }
 
     @Override
-    @Transactional
-    public Page<E> findAll(Pageable pageable) throws Exception{
-        try{
-            return baseRepository.findAll(pageable);
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
+    public E getById(ID id) {
+        var entity = baseRepository.getById(id);
+        logger.info("Obtenida entidad {}",entity);
+        return entity;
     }
 
     @Override
-    @Transactional
-    public List<E> findAll() throws Exception {
-        try{
-            List<E> entities = baseRepository.findAll();
-            if(entities.isEmpty()) throw new Exception("Aún no se han cargado registros");
-            return entities;
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
+    public List<E> getAll() {
+        var entities = baseRepository.getAll();
+        logger.info("Obtenidas entidades {}",entities);
+        return entities;
     }
 
     @Override
-    @Transactional
-    public E findById(Id id) throws Exception {
-        Optional<E> entityOptional = baseRepository.findById(id);
-        if (entityOptional.isPresent()) {
-            return entityOptional.get();
-        } else {
-            throw new Exception("No se encontró ninguna entidad con el ID: " + id);
-        }
+    public void deleteById(ID id) {
+        var entity = getById(id);
+        baseRepository.delete(entity);
+        logger.info("Borrada logicamente entidad {}",entity);
     }
 
     @Override
-    @Transactional
-    public E save(E entity) throws Exception {
-        try{
-            entity = baseRepository.save(entity);
-            return entity;
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
+    public E update(E entity) {
+        var optionalEntity = baseRepository.findById((ID) entity.getId());
+        if (optionalEntity.isEmpty()){
+            logger.error("No se encontro una entidad con el id " + entity.getId());
+            throw new RuntimeException("No se encontro una entidad con el id " + entity.getId());
         }
-    }
-
-    @Override
-    @Transactional
-    public E update(Id id, E entity) throws Exception {
-        try{
-            Optional<E> entityOptional = baseRepository.findById(id);
-            if (entityOptional.isEmpty()) throw new Exception("No existe ningún registro con el ID indicado");
-            return baseRepository.save(entity);
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @Override
-    @Transactional
-    public boolean delete(Id id) throws Exception {
-        try{
-            Optional<E> entityOptional = baseRepository.findById(id);
-            if (entityOptional.isPresent()) {
-                E entity = entityOptional.get();
-                entity.setBaja(true);
-                baseRepository.save(entity);
-                return true;
-            } else {
-                throw new Exception("No existe ningún registro con el ID indicado");
-            }
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
+        var newEntity = baseRepository.save(entity);
+        logger.info("Actualizada entidad {}",newEntity);
+        return newEntity;
     }
 
 }

@@ -1,17 +1,14 @@
 package com.example.buensaborback.business.services;
 
 import com.example.buensaborback.domain.entities.Base;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.io.Serializable;
 import java.util.List;
 
-public interface IBaseService<E extends Base, Id extends Serializable> {
-    Page<E> findAll(Pageable pageable) throws Exception;
-    List<E> findAll() throws Exception;
-    E findById(Id id) throws Exception;
-    E save(E entity) throws Exception;
-    E update(Id id, E entity) throws Exception;
-    boolean delete(Id id) throws Exception;
+public interface IBaseService<E extends Base, ID extends Serializable> {
+    E create(E user);
+    E getById(ID id);
+    List<E> getAll();
+    void deleteById(ID id);
+    E update(E user);
 }
